@@ -1,0 +1,205 @@
+--main ui script
+local ImGui = loadstring(game:HttpGet('https://github.com/depthso/Roblox-ImGUI/raw/main/ImGui.lua'))()
+local Window = ImGui:CreateWindow({
+	Title = "c52a's testing script",
+	Size = UDim2.fromOffset(350, 300), --// Roblox property 
+	Position = UDim2.new(0.5, 0, 0, 70), --// Roblox property 
+})
+local mainTab = Window:CreateTab({
+	Name = "main",
+	Visible = true 
+})
+mainTab:Label({
+	Text = ("welcome user,")
+})
+mainTab:Label({
+	Text = ("this script is made to test the power and")
+})
+mainTab:Label({
+	Text = ("the environment of your executor.")
+})
+mainTab:Separator()
+mainTab:Label({
+	Text = ("current executor:")
+})
+mainTab:Label({
+	Text = (getexecutorname())
+})
+mainTab:Separator()
+mainTab:Label({
+	Text = ("script made by @c52a"),
+	RichText = true
+})
+mainTab:Label({
+	Text = ("Libary made by @depso"),
+	RichText = true
+})
+local conTab = Window:CreateTab({
+	Name = "console",
+	Visible = false
+})
+local Console = conTab:Console({
+	Text = "Console example",
+	ReadOnly = true,
+	Border = false,
+	Fill = true,
+	RichText = true,
+	Enabled = true, 
+	AutoScroll = true,
+	MaxLines = 50
+})
+
+conTab:Button({ --// Toggle to enable the console
+	Text = "pause / resume",
+	Callback = function(self)
+		local Paused = shared.Pause
+		Paused = not (Paused or false)
+		shared.Pause = Paused
+		
+		self.Text = Paused and "Paused" or "Pause"
+		Console.Enabled = not Paused
+	end,
+})
+spawn(function()
+	while wait() do
+		Console:AppendText( --// Passed parameters will be concatenated 
+			`<font color="rgb(240, 40, 10)">[logs]</font>`, 
+			math.random()
+		)
+	end
+end)
+
+
+local ToolTab = Window:CreateTab({
+	Name = "Tools",
+	Visible = false
+})
+ToolTab:Label({
+	Text = ("UNC - Unified Naming Convention")
+})
+ToolTab:Button({
+	Text = "execute unc test",
+	Callback = function(self)
+		print("UNC:")
+		loadstring(game:HttpGet("https://github.com/ltseverydayyou/uuuuuuu/blob/main/UNC%20test?raw=true"))()
+	end,
+})
+
+ToolTab:Separator()
+
+ToolTab:Label({
+	Text = ("LvL - Permission Level")
+})
+ToolTab:Button({
+	Text = "execute lvl test",
+	Callback = function(self)
+		print("Level:")
+		printidentity()
+	end,
+})
+ToolTab:Separator()
+
+ToolTab:Label({
+	Text = ("Executor Version")
+})
+ToolTab:Button({
+	Text = "executor version",
+	Callback = function(self)
+		print("Version:")
+		print(identifyexecutor())
+	end,
+})
+
+local decomTab = Window:CreateTab({
+	Name = "decompiler",
+	Visible = false
+})
+decomTab:Label({
+	Text = ("a tool that attempts to recover the original")
+})
+decomTab:Label({
+	Text = ("script from the bytecode of a script.")
+})
+decomTab:Separator()
+decomTab:Label({
+	Text = ("hydroid is script that collects events")
+})
+decomTab:Button({
+	Text = "excute hydroxid",
+	Callback = function(self)
+		local owner = "c52a"
+		local branch = "modded version"
+
+		local function webImport(file)
+    		return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/%s/Hydroxide/%s/%s.lua"):format(owner, branch, file)), file .. '.lua')()
+		end
+
+		webImport("init")
+		webImport("ui/main")
+	end,
+})
+decomTab:Separator()
+decomTab:Label({
+	Text = ("Dex is a game explorer GUI that shows every")
+})
+decomTab:Label({
+	Text = ("instance of the game and all their properties.")
+})
+decomTab:Label({
+	Text = ("Useful for develepoores.")
+})
+decomTab:Button({
+	Text = "execute secure dex",
+	Callback = function(self)
+		loadstring(game:HttpGet("https://cdn.wearedevs.net/scripts/Dex%20Explorer.txt"))()
+	end,
+})
+
+local scriptTab = Window:CreateTab({
+	Name = "scripts",
+	Visible = false
+})
+scriptTab:Label({
+	Text = ("usefull script you can try executing")
+})
+local TreeNode1 = scriptTab:TreeNode({
+	Title = "classic scripts",
+})
+
+TreeNode1:Button({
+	Text = "infinite yield",
+	Callback = function(self)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source"))()
+	end,
+})
+TreeNode1:Button({
+	Text = "_/SYSTEMBROKEN\_",
+	Callback = function(self)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/H20CalibreYT/SystemBroken/main/script"))()
+	end,
+})
+
+local TreeNode2 = scriptTab:TreeNode({
+	Title = "aimbot / ESP",
+})
+TreeNode2:Button({
+	Text = "nybula",
+	Callback = function(self)
+		loadstring(game:HttpGet("https://nyulachan.github.io/nyula/Nyula/nyula", true))()
+	end,
+})
+TreeNode2:Button({
+	Text = "azure modded",
+	Callback = function(self)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/Actyrn/Scripts/main/AzureModded"))()
+	end,
+})
+local TreeNode3 = scriptTab:TreeNode({
+	Title = "powerful scripts",
+})
+TreeNode3:Button({
+	Text = "Vape v4 ( Bedwars )",
+	Callback = function(self)
+		loadstring(game:HttpGet("https://raw.githubusercontent.com/7GrandDadPGN/VapeV4ForRoblox/main/NewMainScript.lua", true))()
+	end,
+})
