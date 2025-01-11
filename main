@@ -40,9 +40,14 @@ Library:Notify('Vanity Loading..')
 
 wait(1)
 
+local plrname = game.Players.LocalPlayer
+
+Library:Notify('welcome, '..plrname)
+
+
 --// Window
 local Window = Library:CreateWindow({
-    Title = 'vanity.cc | made by vanity | Universal',
+    Title = 'vanity.cc | BETA | 2430075257',
     Center = true,
     AutoShow = true,
     TabPadding = 8,
