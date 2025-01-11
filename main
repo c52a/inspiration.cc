@@ -1,0 +1,210 @@
+--[[
+██╗░░░██╗░█████╗░███╗░░██╗██╗████████╗██╗░░░██╗░░░░█████╗░░█████╗░
+██║░░░██║██╔══██╗████╗░██║██║╚══██╔══╝╚██╗░██╔╝░░░██╔══██╗██╔══██╗
+╚██╗░██╔╝███████║██╔██╗██║██║░░░██║░░░░╚████╔╝░░░░██║░░╚═╝██║░░╚═╝
+░╚████╔╝░██╔══██║██║╚████║██║░░░██║░░░░░╚██╔╝░░░░░██║░░██╗██║░░██╗
+░░╚██╔╝░░██║░░██║██║░╚███║██║░░░██║░░░░░░██║░░░██╗╚█████╔╝╚█████╔╝
+░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚══╝╚═╝░░░╚═╝░░░░░░╚═╝░░░╚═╝░╚════╝░░╚════╝░
+
+Informations
+made by vanity
+
+credits to ui lib and other
+
+--]]
+
+
+--// Services
+local Workspace = game:GetService("Workspace")
+local Players = game:GetService("Players")
+local RunService = game:GetService("RunService")
+local UserInputService = game:GetService("UserInputService")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TweenService = game:GetService("TweenService")
+
+
+--// Libarys
+local repo = 'https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/'
+
+local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
+local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
+local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
+
+
+--// Loading 
+Library:Notify('Vanity Loading..')
+Library:Notify('Vanity Loading..')
+Library:Notify('Vanity Loading..')
+Library:Notify('Vanity Loading..')
+Library:Notify('Vanity Loading..')
+
+wait(1)
+
+--// Window
+local Window = Library:CreateWindow({
+    Title = 'vanity.cc | made by vanity | Universal',
+    Center = true,
+    AutoShow = true,
+    TabPadding = 8,
+    MenuFadeTime = 0.2
+})
+
+--// Tabs
+local Tabs = {
+    Main = Window:AddTab('Main'),
+    ['visuals'] = Window:AddTab('visuals'),
+    ['UI Settings'] = Window:AddTab('settings'),
+}
+
+
+
+
+
+--// Self Trail
+
+local selfvis = Tabs.visuals:AddLeftGroupbox('self visuals')
+
+
+local trailColor = Color3.new(1, 1, 1)
+
+selfvis:AddToggle('trailtog', {
+    Text = 'Trail',
+    Default = false,
+    Tooltip = nil,
+
+    Callback = function(Value)
+        getgenv().trail = Value
+
+        local function createTrail(character)
+            local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+            if not humanoidRootPart:FindFirstChild("Trail") then
+                local Trail = Instance.new("Trail", humanoidRootPart)
+                Trail.Name = "Trail"
+                humanoidRootPart.Material = Enum.Material.Neon
+
+                local Atch0 = Instance.new("Attachment", humanoidRootPart)
+                Atch0.Position = Vector3.new(0, 1, 0)
+                local Atch1 = Instance.new("Attachment", humanoidRootPart)
+                Atch1.Position = Vector3.new(0, -1, 0)
+
+                Trail.Attachment0 = Atch0
+                Trail.Attachment1 = Atch1
+                Trail.Color = ColorSequence.new(trailColor)
+                Trail.Lifetime = 1
+                Trail.Transparency = NumberSequence.new(0, 0)
+                Trail.LightEmission = 1
+                Trail.WidthScale = NumberSequence.new(0.08)
+            end
+        end
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+
+        character:WaitForChild("HumanoidRootPart")
+
+        if getgenv().trail then
+            createTrail(character)
+        else
+            local existingTrail = character:FindFirstChild("HumanoidRootPart"):FindFirstChild("Trail")
+            if existingTrail then
+                existingTrail:Destroy()
+            end
+        end
+
+        player.CharacterAdded:Connect(function(newCharacter)
+            wait(1)
+            if getgenv().trail then
+                createTrail(newCharacter)
+            end
+        end)
+    end
+})
+
+selfvis:AddSlider('trailslider', {
+    Text = 'Trail existence time',
+    Default = 1,
+    Min = 0,
+    Max = 10,
+    Rounding = 1,
+    Compact = false,
+
+    Callback = function(jairok)
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+        local existingTrail = humanoidRootPart:FindFirstChild("Trail")
+        if existingTrail then
+            existingTrail.Lifetime = jairok
+        end
+    end
+})
+
+selfvis:AddLabel('Trail color'):AddColorPicker('ColorPicker', {
+    Default = Color3.new(1, 1, 1),
+    Title = 'Trail Color',
+    Transparency = nil,
+
+    Callback = function(Value)
+        trailColor = Value
+
+        local player = game.Players.LocalPlayer
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:WaitForChild("HumanoidRootPart")
+
+        local existingTrail = humanoidRootPart:FindFirstChild("Trail")
+        if existingTrail then
+            existingTrail.Color = ColorSequence.new(Value)
+        end
+    end
+})
+
+
+
+--// Watermark
+Library:SetWatermarkVisibility(true)
+
+-- Example of dynamically-updating watermark with common traits (fps and ping)
+local FrameTimer = tick()
+local FrameCounter = 0;
+local FPS = 60;
+
+local WatermarkConnection = game:GetService('RunService').RenderStepped:Connect(function()
+    FrameCounter += 1;
+
+    if (tick() - FrameTimer) >= 1 then
+        FPS = FrameCounter;
+        FrameTimer = tick();
+        FrameCounter = 0;
+    end;
+
+    Library:SetWatermark(('vanity.cc | %s fps | %s ms'):format(
+        math.floor(FPS),
+        math.floor(game:GetService('Stats').Network.ServerStatsItem['Data Ping']:GetValue())
+    ));
+end);
+
+Library.KeybindFrame.Visible = true; -- todo: add a function for this
+
+Library:OnUnload(function()
+    WatermarkConnection:Disconnect()
+
+    print('Unloaded!')
+    Library.Unloaded = true
+end)
+
+--// Config System
+local MenuGroup = Tabs['UI Settings']:AddLeftGroupbox('Menu')
+MenuGroup:AddButton('Unload', function() Library:Unload() end)
+MenuGroup:AddLabel('Menu bind'):AddKeyPicker('MenuKeybind', { Default = 'End', NoUI = true, Text = 'Menu keybind' })
+Library.ToggleKeybind = Options.MenuKeybind
+-- Hand the library over to our managers
+ThemeManager:SetLibrary(Library)
+SaveManager:SetLibrary(Library)
+SaveManager:IgnoreThemeSettings()
+SaveManager:SetIgnoreIndexes({ 'MenuKeybind' })
+ThemeManager:SetFolder('vanity.cc')
+SaveManager:SetFolder('vanity.cc/main')
+SaveManager:BuildConfigSection(Tabs['UI Settings'])
+ThemeManager:ApplyToTab(Tabs['UI Settings'])
+SaveManager:LoadAutoloadConfig()
