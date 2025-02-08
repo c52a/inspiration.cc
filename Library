@@ -58,11 +58,11 @@ local Library = {}; do
         end;
 
         if not isfile(Library.FolderName .. '/Utilities/Saturation.png') then
-            writefile(Library.FolderName .. '/Utilities/Saturation.png', game:HttpGet("https://raw.githubusercontent.com/sametexe001/celestial.club/refs/heads/main/images/saturation.png"));
+            writefile(Library.FolderName .. '/Utilities/Saturation.png', game:HttpGet("https://raw.githubusercontent.com/c52a/inspiration.cc/refs/heads/main/saturation.png"));
         end;
 
         if not isfile(Library.FolderName .. '/Utilities/Value.png') then
-            writefile(Library.FolderName .. '/Utilities/Value.png', game:HttpGet("https://raw.githubusercontent.com/sametexe001/celestial.club/refs/heads/main/images/value.png"));
+            writefile(Library.FolderName .. '/Utilities/Value.png', game:HttpGet("https://raw.githubusercontent.com/c52a/inspiration.cc/refs/heads/main/value.png"));
         end;
 
         if not isfile(Library.FolderName .. '/Utilities/Shadow.png') then
@@ -70,7 +70,8 @@ local Library = {}; do
         end;
 
         if not isfile(Library.FolderName .. '/Utilities/Logo.png') then
-            writefile(Library.FolderName .. '/Utilities/Logo.png', game:HttpGet("https://raw.githubusercontent.com/sametexe001/celestial.club/refs/heads/main/images/celestiallogo-removebg-preview.png"));
+            writefile(Library.FolderName .. '/Utilities/Logo.png', game:HttpGet("https://raw.githubusercontent.com/c52a/inspiration.cc/refs/heads/main/
+            celestiallogo-removebg-preview.png"));
         end;
     end;
 
