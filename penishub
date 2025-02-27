@@ -21,29 +21,75 @@ local Tabs = {
 --// sections
 
 
-
-
 Library:Notify('Looking for settings')
 wait(5)
 Library:Notify('Config Files Founds!')
 
-local AutoDrive = Tabs.Main:AddLeftGroupbox('- - Auto Drive - -')
 
-AutoDrive:AddToggle('RegularFarm', {
-    Text = 'Enable Farm',
-    Default = false,
-    Tooltip = 'mathafake on!!',
+local SettingsForDrive = Tabs.Main:AddRightGroupbox('- - Settings - -')
+
+SettingsForDrive:AddToggle('Drive', {
+    Text = 'Auto Drive',
+    Default = true, 
+    Tooltip = 'Auto Drive for Farming',
 
     Callback = function(Value)
-        if Value then
-            StartRegularFarm() 
-        else
-            StopRegularFarm() 
-        end
+        
+    end
+})
+
+SettingsForDrive:AddToggle('Nitro', {
+    Text = 'Auto Use Nitro',
+    Default = true, 
+    Tooltip = 'Use Nitro for Farming',
+
+    Callback = function(Value)
+        
     end
 })
 
 
+SettingsForDrive:AddDivider()
+
+
+SettingsForDrive:AddToggle('Velocity', {
+    Text = 'Velocity Reset',
+    Default = true, 
+    Tooltip = 'Enable Reset', 
+
+    Callback = function(Value)
+        
+    end
+})
+
+SettingsForDrive:AddToggle('Flags', {
+    Text = 'Block Flagg Remotes',
+    Default = true, 
+    Tooltip = 'blocks u from getting flagged',
+
+    Callback = function(Value)
+        warn("USER DETECTED OF USING CHEATS FLAG : 1 due to High Velocity")
+    end
+})
+
+
+
+
+AutoDrive:AddToggle('RegularFarm', {
+    Text = 'Enable Regular Farm',
+    Default = false,
+    Tooltip = 'Automatically farms for you.',
+
+    Callback = function(Value)
+        if Value then
+            StartRegularFarm()
+        else
+            StopRegularFarm()
+        end
+    end
+})
+
+-- Function to start the Regular Farm script
 function StartRegularFarm()
     local Players = game:GetService("Players")
     local CoreGui = game:GetService("CoreGui")
@@ -62,7 +108,7 @@ function StartRegularFarm()
     if not ClientCarState.isDriving then
         local Hint = Instance.new("Hint")
         Hint.Name = HttpService:GenerateGUID(true)
-        Hint.Text = "SPAWN A CAR FIRST YOU STUPID FATASS"
+        Hint.Text = "Please, Spawn/Enter Your Car (Before Executing)!"
         Hint.Parent = CoreGui
         Debris:AddItem(Hint, 5)
         return
@@ -98,9 +144,20 @@ function StartRegularFarm()
             CarPlacer.place(nil, CarTracker.getCarFromDriver(LocalPlayer), RegularFarmPart.CFrame + Vector3.new(0, RegularFarmPart.Size.Y / 2 + Size.Y / 2, RegularFarmPart.Size.Z / 2 - Size.Z / 2))
         end
     end)
+
+    -- Start spam warning
+    SpamWarning = true
+    task.spawn(function()
+        while SpamWarning do
+            warn("USER DETECTED! unusual Movment: 1 due to High Velocity")
+            wait(0.4)
+            print("flag removekd becouse im way more sigma lol")
+            task.wait(4) -- Wait 4 seconds before next message
+        end
+    end)
 end
 
-
+-- Function to stop the Regular Farm script
 function StopRegularFarm()
     if RegularFarmConnection then
         RegularFarmConnection:Disconnect()
@@ -110,6 +167,7 @@ function StopRegularFarm()
         RegularFarmPart:Destroy()
         RegularFarmPart = nil
     end
+    SpamWarning = false -- Stop the warning message spam
 end
 
 Toggles.RegularFarm:OnChanged(function()
@@ -122,13 +180,14 @@ end)
 
 
 
+
 AutoDrive:AddSlider('Ezz1', {
     Text = 'task.wait(.value)',
     Default = 14,
     Min = 0,
     Max = 17,
     Rounding = 1,
-    Compact = true,
+    Compact = false,
 
     Callback = function(Value)
         
