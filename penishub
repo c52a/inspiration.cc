@@ -27,22 +27,25 @@ getgenv().cprint = function(value, color)
     end)
 end
 
+
+
 local repo = 'https://raw.githubusercontent.com/violin-suzutsuki/LinoriaLib/main/'
 local Library = loadstring(game:HttpGet(repo .. 'Library.lua'))()
 local ThemeManager = loadstring(game:HttpGet(repo .. 'addons/ThemeManager.lua'))()
 local SaveManager = loadstring(game:HttpGet(repo .. 'addons/SaveManager.lua'))()
 local Window = Library:CreateWindow({
-    Title = 'Анти production | Car Driving | Accent >>>',
+    Title = 'Gemstone.lua | 💎 | by Анти | Accent >>>',
     Center = true,
     AutoShow = true,
     TabPadding = 8,
     MenuFadeTime = 0.2
 })
 local Tabs = {
-    Main = Window:AddTab('< -  💸 - >'),
-    ['Move'] = Window:AddTab('< -  🏎  - >'),
-    ['Vis'] = Window:AddTab('< -  👁  - >'),
-    ['UI Settings'] = Window:AddTab('< -  🔨  - >'),
+    Main = Window:AddTab(' - Auto Farm'),
+    ['Move'] = Window:AddTab('Movement'),
+    ['Vis'] = Window:AddTab('Render'),
+    ['misc'] = Window:AddTab('Miscellaneous'),
+    ['UI Settings'] = Window:AddTab('Settings'),
 
 }
 
@@ -50,7 +53,7 @@ local Tabs = {
 
 
 Library:Notify('Looking for settings')
-
+wait(5)
 Library:Notify('Config Files Founds!')
 
 
@@ -100,6 +103,7 @@ SettingsForDrive:AddToggle('Flags', {
 })
 
 
+local AutoDrive = Tabs.Main:AddLeftGroupbox('- - Auto Farm - -')
 
 
 AutoDrive:AddToggle('RegularFarm', {
@@ -109,9 +113,9 @@ AutoDrive:AddToggle('RegularFarm', {
 
     Callback = function(Value)
         if Value then
-            StartRegularFarm()
+            StartRegularFarm() -- Start the script when toggled on
         else
-            StopRegularFarm()
+            StopRegularFarm() -- Stop the script when toggled off
         end
     end
 })
@@ -133,11 +137,22 @@ function StartRegularFarm()
     local ClientCarState = require(pcar.ClientCarState)
 
     if not ClientCarState.isDriving then
-        local Hint = Instance.new("Hint")
-        Hint.Name = HttpService:GenerateGUID(true)
-        Hint.Text = "Please, Spawn/Enter Your Car (Before Executing)!"
-        Hint.Parent = CoreGui
-        Debris:AddItem(Hint, 5)
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
+        Library:Notify("‼ ‼SPAWN A CAR FIRST ‼ ‼")
         return
     end
 
@@ -171,17 +186,6 @@ function StartRegularFarm()
             CarPlacer.place(nil, CarTracker.getCarFromDriver(LocalPlayer), RegularFarmPart.CFrame + Vector3.new(0, RegularFarmPart.Size.Y / 2 + Size.Y / 2, RegularFarmPart.Size.Z / 2 - Size.Z / 2))
         end
     end)
-
-    -- Start spam warning
-    SpamWarning = true
-    task.spawn(function()
-        while SpamWarning do
-            warn("USER DETECTED! unusual Movment: 1 due to High Velocity")
-            wait(0.3)
-            cprint("revoked.flag succesfull", Color3.fromRGB(0,255,0))
-            task.wait(4) -- Wait 4 seconds before next message
-        end
-    end)
 end
 
 -- Function to stop the Regular Farm script
@@ -194,7 +198,6 @@ function StopRegularFarm()
         RegularFarmPart:Destroy()
         RegularFarmPart = nil
     end
-    SpamWarning = false -- Stop the warning message spam
 end
 
 Toggles.RegularFarm:OnChanged(function()
@@ -204,6 +207,7 @@ Toggles.RegularFarm:OnChanged(function()
         StopRegularFarm()
     end
 end)
+
 
 
 
@@ -236,7 +240,7 @@ local WatermarkConnection = game:GetService('RunService').RenderStepped:Connect(
         FrameTimer = tick();
         FrameCounter = 0;
     end;
-    Library:SetWatermark(('Imagin using velocity anticheat 🤣 | %s fps | %s ms'):format(
+    Library:SetWatermark(('Gemstone.lua | 💎 | %s fps | %s ms'):format(
         math.floor(FPS),
         math.floor(game:GetService('Stats').Network.ServerStatsItem['Data Ping']:GetValue())
     ));
@@ -260,3 +264,7 @@ SaveManager:SetFolder('CarDrive/game-game')
 SaveManager:BuildConfigSection(Tabs['UI Settings'])
 ThemeManager:ApplyToTab(Tabs['UI Settings'])
 SaveManager:LoadAutoloadConfig()
+
+
+
+cprint("Loaded Successfully", Color3.fromRGB(0,255,0))
