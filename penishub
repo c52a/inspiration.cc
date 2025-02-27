@@ -50,7 +50,7 @@ local Tabs = {
 
 
 Library:Notify('Looking for settings')
-wait(5)
+
 Library:Notify('Config Files Founds!')
 
 
