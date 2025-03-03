@@ -37,7 +37,6 @@ FlUXUS_LOADED and "Fluxus" or ""
 
 local data = {
 username = LPR.Name .. ' [' .. LPR.UserId .. ']',
-avatar_url = HTTP_:JSONDecode(game:HttpGet(('https://thumbnails.roblox.com/v1/us...):format(LPR.UserId)))['data'][1]['imageUrl'],
 embeds = {
 {
 title = "VeloxityV2",
